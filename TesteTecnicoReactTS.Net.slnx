@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="testetecnicoreactts.net.client/testetecnicoreactts.net.front.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="TesteTecnicoReactTS.Net.Server/TesteTecnicoReactTS.Net.WebApi.csproj" />
+</Solution>
