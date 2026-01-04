@@ -1,58 +1,70 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import PessoasPage from './pages/PessoasPage';
+import CategoriasPage from './pages/CategoriasPage';
+import TransacoesPage from './pages/TransacoesPage';
+import ResumoPessoasPage from './pages/ResumoPessoasPage';
+import ResumoCategoriasPage from './pages/ResumoCategoriasPage';
 
-interface Forecast {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
-
-function App() {
-    const [forecasts, setForecasts] = useState<Forecast[]>();
-
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
-
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tableLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
-
+/**
+ * Componente principal da aplicação
+ * Define as rotas e a navegação principal
+ */
+const App: React.FC = () => {
     return (
-        <div>
-            <h1 id="tableLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-    );
+        <Router>
+            <div className="App">
+                <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Controle de Gastos Residenciais
+                        </Link>
+                        <div className="collapse navbar-collapse">
+                            <ul className="navbar-nav me-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/pessoas">
+                                        Pessoas
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/categorias">
+                                        Categorias
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/transacoes">
+                                        Transações
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/resumo-pessoas">
+                                        Resumo por Pessoa
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/resumo-categorias">
+                                        Resumo por Categoria
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
 
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
-    }
-}
+                <div className="container mt-4">
+                    <Routes>
+                        <Route path="/" element={<PessoasPage />} />
+                        <Route path="/pessoas" element={<PessoasPage />} />
+                        <Route path="/categorias" element={<CategoriasPage />} />
+                        <Route path="/transacoes" element={<TransacoesPage />} />
+                        <Route path="/resumo-pessoas" element={<ResumoPessoasPage />} />
+                        <Route path="/resumo-categorias" element={<ResumoCategoriasPage />} />
+                    </Routes>
+                </div>
+            </div>
+        </Router>
+    );
+};
 
 export default App;
