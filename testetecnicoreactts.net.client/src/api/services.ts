@@ -1,5 +1,5 @@
 import api from './axiosConfig';
-import {
+import type {
     Pessoa,
     CriarPessoaDTO,
     Categoria,
@@ -9,7 +9,7 @@ import {
     ResumoGeral,
     ResumoCategoriaGeral,
     FinalidadeCategoria,
-    TipoTransacao
+ //   TipoTransacao
 } from '../types';
 
 /**
