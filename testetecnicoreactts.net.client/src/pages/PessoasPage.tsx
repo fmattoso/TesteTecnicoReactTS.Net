@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PessoaService } from '../api/services';
-import { Pessoa, CriarPessoaDTO } from '../types';
+import type { Pessoa, CriarPessoaDTO } from '../types';
 import Modal from '../components/Modal';
 
 /**
